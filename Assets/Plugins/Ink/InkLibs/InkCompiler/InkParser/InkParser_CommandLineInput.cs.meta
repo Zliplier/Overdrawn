@@ -14,5 +14,5 @@ AssetOrigin:
   productId: 60055
   packageName: Ink Integration for Unity
   packageVersion: 1.1.8
-  assetPath: Assets/Ink/InkLibs/InkCompiler/InkParser/InkParser_CommandLineInput.cs
+  assetPath: Assets/Plugins/Ink/InkLibs/InkCompiler/InkParser/InkParser_CommandLineInput.cs
   uploadId: 600250

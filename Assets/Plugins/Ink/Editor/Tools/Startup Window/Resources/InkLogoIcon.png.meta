@@ -124,5 +124,5 @@ AssetOrigin:
   productId: 60055
   packageName: Ink Integration for Unity
   packageVersion: 1.1.8
-  assetPath: Assets/Ink/Editor/Tools/Startup Window/Resources/InkLogoIcon.png
+  assetPath: Assets/Plugins/Ink/Editor/Tools/Startup Window/Resources/InkLogoIcon.png
   uploadId: 600250

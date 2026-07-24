@@ -11,5 +11,5 @@ AssetOrigin:
   productId: 60055
   packageName: Ink Integration for Unity
   packageVersion: 1.1.8
-  assetPath: Assets/Ink/Editor/Tools/File Icons/Resources/InkDefaultTemplate.txt
+  assetPath: Assets/Plugins/Ink/Editor/Tools/File Icons/Resources/InkDefaultTemplate.txt
   uploadId: 600250

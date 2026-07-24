@@ -14,5 +14,5 @@ AssetOrigin:
   productId: 60055
   packageName: Ink Integration for Unity
   packageVersion: 1.1.8
-  assetPath: Assets/Ink/Editor/Core/Ink Library/InkCompilerLog.cs
+  assetPath: Assets/Plugins/Ink/Editor/Core/Ink Library/InkCompilerLog.cs
   uploadId: 600250
