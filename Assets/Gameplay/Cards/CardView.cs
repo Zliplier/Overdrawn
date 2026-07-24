@@ -16,8 +16,8 @@ namespace Gameplay.Cards
         [SerializeField] private CanvasGroup canvasGroup;
         
         [field: SerializeField] public RectTransform rectTransform { get; private set; }
-        
-        private Card card;
+
+        public Card card { get; private set; }
         private CanvasGroupController cgController;
         
         private void Awake()

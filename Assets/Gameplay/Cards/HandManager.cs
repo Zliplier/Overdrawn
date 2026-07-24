@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using DG.Tweening;
 using NUnit.Framework;
@@ -13,7 +14,7 @@ namespace Gameplay.Cards
 {
     public class HandManager : MonoBehaviour
     {
-        [SerializeField] private int maxHandSize;
+        [field: SerializeField] public int maxHandSize { get; private set; }
         [SerializeField] private SplineContainer splineContainer;
         [field: SerializeField] public RectTransform cardParent { get; private set; }
 
@@ -29,6 +30,18 @@ namespace Gameplay.Cards
             handCards.Add(cardView);
             yield return UpdateCardPosition();
         }
+
+        public CardView RemoveCard(Card card)
+        {
+            CardView cardView = GetCardView(card);
+            if (cardView == null)
+                return null;
+            handCards.Remove(cardView);
+            StartCoroutine(UpdateCardPosition());
+            return cardView;
+        }
+        
+        public CardView GetCardView(Card card) => handCards.FirstOrDefault(cardView => cardView.card == card);
         
         private IEnumerator UpdateCardPosition(float duration = 0.25f)
         {

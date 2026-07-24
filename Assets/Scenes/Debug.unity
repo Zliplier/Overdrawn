@@ -516,7 +516,7 @@ MonoBehaviour:
     CustomLookAtTarget: 0
   Lens:
     FieldOfView: 60.000004
-    OrthographicSize: 5
+    OrthographicSize: 8
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -997,7 +997,7 @@ Camera:
   far clip plane: 1000
   field of view: 60.000004
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1638,7 +1638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9643feaa20484785b412676a4cc0347b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.Cards.HandManager
-  maxHandSize: 10
+  maxHandSize: 4
   splineContainer: {fileID: 1594749902}
   <cardParent>k__BackingField: {fileID: 1594749903}
 --- !u!114 &582504710
@@ -1665,6 +1665,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 686526111}
+  - component: {fileID: 686526112}
   m_Layer: 0
   m_Name: Exhaustion
   m_TagString: Untagged
@@ -1693,6 +1694,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 51}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0}
+--- !u!225 &686526112
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686526110}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &718843845
 GameObject:
   m_ObjectHideFlags: 0
@@ -2974,12 +2987,13 @@ Transform:
   m_GameObject: {fileID: 1278736283}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.78889, y: -0, z: -1.12644}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 409315924}
   - {fileID: 1797063557}
+  - {fileID: 1497292858}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1324619228
@@ -3380,6 +3394,51 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &1497292857
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1497292858}
+  - component: {fileID: 1497292859}
+  m_Layer: 0
+  m_Name: Action System
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1497292858
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497292857}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1278736284}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1497292859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497292857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62b1ef603d8f47a498dfb5814ad5c0e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Zlipacket.CoreZlipacket.ActionSystem.ActionSystem
+  initialized: 0
 --- !u!1 &1537409885
 GameObject:
   m_ObjectHideFlags: 0
@@ -3551,26 +3610,26 @@ MonoBehaviour:
   - m_EditModeType: 1
     m_Knots:
     - Position:
-        x: -500
+        x: -400
         y: 0
         z: 0
       TangentIn:
-        x: -0
-        y: -0
-        z: -50.18081
+        x: 0
+        y: 0
+        z: 0
       TangentOut:
         x: 0
         y: 0
-        z: 50.18081
+        z: 0
       Rotation:
         value:
-          x: -0.52077186
-          y: 0.47832692
-          z: -0.47832692
-          w: 0.5207718
+          x: -0.5257858
+          y: 0.47280997
+          z: -0.47280997
+          w: 0.5257857
     - Position:
         x: 0
-        y: 42.56
+        y: 30
         z: 0
       TangentIn:
         x: 0
@@ -3583,33 +3642,33 @@ MonoBehaviour:
       Rotation:
         value:
           x: 0
-          y: 0.70710665
+          y: 0.70710677
           z: 0
-          w: 0.7071069
+          w: 0.70710677
     - Position:
-        x: 500
+        x: 400
         y: 0
         z: 0
       TangentIn:
-        x: -0
-        y: -0
-        z: -50.18081
+        x: 0
+        y: 0
+        z: 0
       TangentOut:
         x: 0
         y: 0
-        z: 50.18081
+        z: 0
       Rotation:
         value:
-          x: -0.47832692
-          y: 0.5207718
-          z: -0.52077186
-          w: 0.47832692
+          x: -0.47280997
+          y: 0.5257857
+          z: -0.5257858
+          w: 0.47280997
     m_MetaData:
-    - Mode: 0
+    - Mode: 1
       Tension: 0.5
     - Mode: 3
       Tension: 0.5
-    - Mode: 0
+    - Mode: 1
       Tension: 0.5
     m_Closed: 0
     m_IntData:
@@ -3638,7 +3697,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 33}
+  m_AnchoredPosition: {x: 0, y: -40}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &1645398767
