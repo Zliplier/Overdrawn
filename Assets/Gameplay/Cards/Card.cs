@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using Gameplay.Effects;
+using UnityEngine;
 
 namespace Gameplay.Cards
 {
@@ -9,18 +11,15 @@ namespace Gameplay.Cards
         public Card(SO_CardData cardData)
         {
             this.cardData = cardData;
-            Effect = cardData.Effect;
+            Effects = cardData.Effects;
             Cost = cardData.Cost;
+            Description = cardData.Description;
         }
         
         public Sprite Sprite { get => cardData.Sprite; }
-        public string Title { get => cardData.name; }
+        public string Title { get => cardData.Title; }
+        public string Description { get; set; }
         public int Cost { get; set; }
-        public string Effect { get; set; }
-
-        public void PerformEffect()
-        {
-            Debug.Log("Effect " + Effect + " cost: " + Cost);
-        }
+        public List<Effect> Effects { get; set; }
     }
 }

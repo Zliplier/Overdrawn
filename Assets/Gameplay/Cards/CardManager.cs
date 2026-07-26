@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using Gameplay.GameActions;
+using Player.Script;
 using UnityEngine;
 using Zlipacket.CoreZlipacket.ActionSystem;
 using Zlipacket.CoreZlipacket.Tools;
@@ -14,18 +15,28 @@ namespace Gameplay.Cards
     {
         [Header("Components")]
         [SerializeField] private HandManager handManager;
+        [SerializeField] public PlayerStats playerStats;
         
         [Header("Prefabs")]
         [SerializeField] private CardView cardViewPrefab;
+        
+        [Header("Settings")]
+        public LayerMask playLayer;
+        [SerializeField] private SO_DeckData deckData;
 
         private readonly List<Card> drawPile = new();
         private readonly List<Card> discardPile = new();
         private readonly List<Card> hand = new();
 
+        [HideInInspector] public Vector3 aimPosition = Vector3.zero;
+        
         private void OnEnable()
         {
             ActionSystem.AttachPerformer<GA_DrawCard>(DrawCardPerformer);
             ActionSystem.AttachPerformer<GA_PlayCard>(PlayCardPerformer);
+
+            ActionSystem.AttachPerformer<GA_AddEnergy>(AddEnergyPerformer);
+            
             ActionSystem.SubscribeReaction<GA_PlayCard>(PlayCardReaction, ReactionTiming.POST);
         }
 
@@ -33,9 +44,18 @@ namespace Gameplay.Cards
         {
             ActionSystem.DetachPerformer<GA_DrawCard>();
             ActionSystem.DetachPerformer<GA_PlayCard>();
+
+            ActionSystem.DetachPerformer<GA_AddEnergy>();
+            
             ActionSystem.UnsubscribeReaction<GA_PlayCard>(PlayCardReaction, ReactionTiming.POST);
         }
-        
+
+        private void Start()
+        {
+            SetUp(deckData.deckList);
+            DrawToFull();
+        }
+
         // Performer
         public IEnumerator DrawCardPerformer(GA_DrawCard gaDrawCard)
         {
@@ -47,7 +67,7 @@ namespace Gameplay.Cards
                 yield return DrawCard();
             }
 
-            if (notDrawnAmount > 0)
+            if (notDrawnAmount > 0 && discardPile.Count > 0)
             {
                 RefillDeck();
                 for (int i = 0; i < notDrawnAmount; i++)
@@ -62,8 +82,24 @@ namespace Gameplay.Cards
             hand.Remove(gaPlayCard.Card);
             CardView cardView = handManager.RemoveCard(gaPlayCard.Card);
             yield return DiscardCard(cardView);
+            CardViewHover.Instance.Hide();
             
-            //TODO: Perform Effects.
+            GA_AddEnergy gaAddEnergy = new(gaPlayCard.Card.Cost);
+            ActionSystem.Instance.AddReaction(gaAddEnergy);
+
+            foreach (var effect in gaPlayCard.Card.Effects)
+            {
+                GA_PerformEffect gaPerformEffect = new(effect);
+                ActionSystem.Instance.AddReaction(gaPerformEffect);
+            }
+        }
+
+
+        public IEnumerator AddEnergyPerformer(GA_AddEnergy gaAddEnergy)
+        {
+            playerStats.Energy += gaAddEnergy.amount;
+            
+            yield return null;
         }
         
         // Reactions
@@ -81,6 +117,18 @@ namespace Gameplay.Cards
                 Card card = new(cardData);
                 drawPile.Add(card);
             }
+        }
+
+        public void DrawCard(int amount)
+        {
+            GA_DrawCard gaDrawCard = new(amount);
+            ActionSystem.Instance.Perform(gaDrawCard);
+        }
+
+        public void DrawToFull()
+        {
+            GA_DrawCard gaDrawCard = new(handManager.maxHandSize);
+            ActionSystem.Instance.Perform(gaDrawCard);
         }
 
         // Helpers
@@ -105,11 +153,8 @@ namespace Gameplay.Cards
 
         public IEnumerator DrawCard()
         {
-            /*if (handManager.IsHandFull)
+            if (handManager.IsHandFull)
                 yield break;
-            
-            CardView cardView = CreateCardView(null, handManager.cardParent);
-            StartCoroutine(handManager.AddCard(cardView));*/
             
             Card card = drawPile.Draw();
             hand.Add(card);
@@ -119,6 +164,8 @@ namespace Gameplay.Cards
 
         private IEnumerator DiscardCard(CardView cardView)
         {
+            discardPile.Add(cardView.card);
+            
             yield return null;
             Destroy(cardView.gameObject);
         }

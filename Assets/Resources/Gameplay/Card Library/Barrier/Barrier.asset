@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94dee9de69f54170bf3a3274c2c83d84, type: 3}
+  m_Name: Barrier
+  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.Cards.SO_CardData
+  <Sprite>k__BackingField: {fileID: 0}
+  <Title>k__BackingField: Barrier
+  <Description>k__BackingField: shield that blocks the next hit.
+  <Cost>k__BackingField: 1
+  <Effect>k__BackingField: 

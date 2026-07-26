@@ -60,11 +60,11 @@ namespace Zlipacket.CoreZlipacket.UI
                     isSnapping = false;
                 }
             }
-            /*else if (!isDragging && scrollRect.velocity.magnitude < velocityThreshold && scrollRect.velocity.magnitude > 0.01f)
+            else if (!isDragging && scrollRect.velocity.magnitude < velocityThreshold && scrollRect.velocity.magnitude > 0.01f)
             {
                 // Momentum has settled naturally, snap to nearest
                 SnapToNearest();
-            }*/
+            }
         }
 
         void UpdateItemScales()

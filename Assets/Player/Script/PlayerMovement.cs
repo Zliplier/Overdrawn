@@ -6,6 +6,7 @@ namespace Player.Script
     public class PlayerMovement : PlayerScript
     {
         public PlayerStats playerStats;
+        public PlayerAnimator playerAnimator;
         
         //Input
         private Vector3 movementInput = Vector3.zero;
@@ -32,16 +33,29 @@ namespace Player.Script
         private void Update()
         {
             TurnCheck();
+            HandleAnimation();
             HandleMovement();
             ApplyMovement();
         }
 
         private void TurnCheck()
         {
-            if ((moveVelocity.x > 0 && movementInput.x < 0) || (moveVelocity.x < 0 && movementInput.x > 0))
+            // Turn Left
+            if (moveVelocity.x > 0 && movementInput.x < 0)
+            {
                 moveVelocity.x -= moveVelocity.x * playerStats.turnCompensation;
+            }
+            // Turn Right
+            else if (moveVelocity.x < 0 && movementInput.x > 0)
+            {
+                moveVelocity.x -= moveVelocity.x * playerStats.turnCompensation;
+            }
+
             if ((moveVelocity.z < 0 && movementInput.z > 0) || (moveVelocity.z < 0 && movementInput.z > 0))
+            {
                 moveVelocity.z -= moveVelocity.z * playerStats.turnCompensation;
+            }
+            
         }
         
         private void ApplyMovement() => rb.linearVelocity = velocity;
@@ -66,6 +80,36 @@ namespace Player.Script
                 moveVelocity, 
                 movementInput * targetSpeed, 
                 accelRate * Time.deltaTime);
+        }
+
+        private void HandleAnimation()
+        {
+            if (movementInput == Vector3.zero)
+            {
+                playerAnimator.SetAnimation("Idle");
+            }
+            else if (movementInput.x > 0)
+            {
+                playerAnimator.SetAnimation("WalkR");
+                playerAnimator.spriteRenderer.flipX = false;
+            }
+            else if (movementInput.x < 0)
+            {
+                playerAnimator.SetAnimation("WalkL");
+                playerAnimator.spriteRenderer.flipX = true;
+            }
+            else if (movementInput.z != 0)
+            {
+                if (!playerAnimator.spriteRenderer.flipX)
+                {
+                    playerAnimator.SetAnimation("WalkR");
+                }
+                else
+                {
+                    playerAnimator.SetAnimation("WalkL");
+                }
+            }
+            
         }
     }
 }

@@ -15,46 +15,59 @@ namespace Player.Script
         [Header("Combat")]
         #region Health
 
-        [SerializeField] private float health = 100f;
-        public const float MaxHealth = 100f;
-        public float healthPercentage => Health / MaxHealth;
+        [SerializeField] private float health = 3f;
+        public float MaxHealth = 3f;
         public float Health
         {
             get => health;
             set
             {
                 health = Mathf.Clamp(value, 0, MaxHealth);
-                onHealthChanged?.Invoke(healthPercentage);
+                onHealthChanged?.Invoke(health, MaxHealth);
             }
         }
-        public UnityEvent<float> onHealthChanged;
+        public UnityEvent<float, float> onHealthChanged;
 
         #endregion
 
-        #region Exhaustion
+        #region Energy
 
-        [SerializeField] private float exhaustion = 3f;
-        public float exhaustionDecayRate = 1f; // 1 per 1 irl second.
-        public const float MaxExhaustion = 3f;
-        public float exhaustionPercentage => Exhaustion / MaxExhaustion;
-        public float Exhaustion
+        [SerializeField] private float energy = 3f;
+        public float energyDecayTime = 2f; // 1 per 2 irl second.
+        public float MaxEnergy = 3f;
+        public float Energy
         {
-            get => exhaustion;
+            get => energy;
             set
             {
-                exhaustion = Mathf.Clamp(value, 0, Mathf.Infinity);
-                onExhaustionChanged?.Invoke(exhaustionPercentage);
+                energy = Mathf.Clamp(value, 0, Mathf.Infinity);
+                onEnergyChanged?.Invoke(energy, MaxEnergy);
             }
         }
-        public UnityEvent<float> onExhaustionChanged;
+        public UnityEvent<float, float> onEnergyChanged;
+        public bool HasEnoughEnergy() => energy <= MaxEnergy;
 
         #endregion
-
-
+        
         private void OnDisable()
         {
             onHealthChanged.RemoveAllListeners();
-            onExhaustionChanged.RemoveAllListeners();
+            onEnergyChanged.RemoveAllListeners();
+        }
+
+        private void FixedUpdate()
+        {
+            EnergyDecay();
+        }
+
+        private void EnergyDecay()
+        {
+            if (Energy > 0)
+                Energy -= (1.0f / energyDecayTime) * Time.fixedDeltaTime;
+            else
+            {
+                Energy = 0f;
+            }
         }
     }
 }

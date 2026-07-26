@@ -14,6 +14,7 @@ namespace Player
         public Collider col;
         public Animator animator;
         public CinemachineCamera cam;
+        
     }
 
     public enum FaceDirection

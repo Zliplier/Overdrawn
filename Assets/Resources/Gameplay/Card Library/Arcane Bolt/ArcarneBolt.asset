@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94dee9de69f54170bf3a3274c2c83d84, type: 3}
+  m_Name: ArcarneBolt
+  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.Cards.SO_CardData
+  <Sprite>k__BackingField: {fileID: 0}
+  <Title>k__BackingField: Arcane Bolt
+  <Description>k__BackingField: Shoot magic in a short line. Deal small damage to
+    one enemy.
+  <Cost>k__BackingField: 0
+  <Effects>k__BackingField:
+  - rid: 2433523269777490016
+  references:
+    version: 2
+    RefIds:
+    - rid: 2433523269777490016
+      type: {class: ShootEffect, ns: Gameplay.Effects, asm: Assembly-CSharp}
+      data:
+        projectile: {fileID: 8874473457095591765, guid: 713149bfbb53ce24bb3f85aab25c5aae, type: 3}
