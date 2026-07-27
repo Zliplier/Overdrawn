@@ -24,7 +24,7 @@ namespace Gameplay.Objects
             onHit.AddListener(Terminate);
         }
 
-        protected virtual void Update()
+        protected virtual void FixedUpdate()
         {
             Vector3 targetVelocity = transform.forward * speed;
             targetVelocity.y = rb.linearVelocity.y; 
@@ -32,6 +32,9 @@ namespace Gameplay.Objects
             Vector3 velocityChange = targetVelocity - rb.linearVelocity;
             
             rb.AddForce(velocityChange, ForceMode.VelocityChange);
+            //rb.linearVelocity = targetVelocity;
+            
+            Debug.Log(transform.forward);
         }
         
         public virtual void BeginLifetime()
